@@ -68,3 +68,10 @@ public:
     if (chance == 19) { volatile int v1 = poly_random(10000), v2 = v1 / (poly_random(10000) + 1); } \
     if (chance == 20) { volatile int v1 = poly_random(10000), v2 = v1 % (poly_random(10000) + 1); } \
 }
+
+// random order of operations for two functions
+#define poly_random_order(f1,f2) { \
+    int chance = poly_random(2); \
+    if (chance == 0) { f1; f2; } \
+    else { f2; f1; } \
+}
