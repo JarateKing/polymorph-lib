@@ -14,6 +14,12 @@ This is *not* a polymorphic code engine, but it takes inspiration from the conce
 
 1. Put `include/polymorph-lib.h` somewhere in your project.
 2. Include it to your project through `#include "polymorph-lib.h"` or some related include statement
+3. Use randomized functions. Some major ones are:
+- - `poly_random(n)` - get a random number between 0 (inclusive) and n (exclusive)
+- - `poly_junk()` - make junk code that doesn't do anything
+- - `poly_random_order(f1,f2)` - run the functions `f1` and `f2` in some random order
+- - `poly_random_chance(c,f)` - random chance to call function `f` -- approximately every `c` distinct calls will call `f` once
+
 ## Details
 
 Before I describe the details of the random number generator, I should delve into the source of entropy used. The GCC supports `__DATE__` and `__TIME__` macros which change on each compile (assuming the compiles aren't made within the same second). We combine those into an integer, that acts as our initial seed.
