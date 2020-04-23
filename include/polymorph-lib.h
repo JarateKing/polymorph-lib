@@ -75,3 +75,9 @@ public:
     if (chance == 0) { f1; f2; } \
     else { f2; f1; } \
 }
+
+// every `c` calls, on average the function `f` will only get executed once
+#define poly_random_chance(c,f) { \
+    int chance = poly_random(c); \
+    if (chance == 0) { f; } \
+}
