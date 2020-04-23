@@ -36,10 +36,35 @@ public:
                                 (__TIME__[7] - '0') * 100000000;
 };
 
-// we also define a convenient interface to getting the next random
-#define RANDO(max) (poly::Widynski_Squares(__COUNTER__, poly::Seed) % max)
-
 // =====================
 // POLYMORPHIC FUNCTIONS
 // =====================
 
+// random number modulo max
+#define poly_random(max) (poly::Widynski_Squares(__COUNTER__, poly::Seed) % max)
+
+// random no-ops, inserts junk code
+#define poly_junk() { \
+	int chance = poly_random(21); \
+	if (chance == 0) { volatile int value = poly_random(10000); } \
+	if (chance == 1) { volatile float value = poly_random(1000); } \
+    if (chance == 2) { volatile double value = poly_random(1000); } \
+    if (chance == 3) { volatile char value = poly_random(100000); } \
+    if (chance == 4) { volatile int v[4] = {poly_random(1000), poly_random(1000), poly_random(1000), poly_random(1000)}; } \
+    if (chance == 5) { volatile int v[2] = {poly_random(10000), poly_random(10000)}; volatile int vo = v[1] + v[2]; } \
+    if (chance == 6) { volatile int v[2] = {poly_random(10000), poly_random(10000)}; volatile int vo = v[1] * v[2]; } \
+    if (chance == 7) { volatile int v[2] = {poly_random(10000), poly_random(10000)}; volatile int vo = v[1] | v[2]; } \
+    if (chance == 8) { volatile int v[2] = {poly_random(10000), poly_random(10000)}; volatile int vo = v[1] ^ v[2]; } \
+    if (chance == 9) { volatile int v[2] = {poly_random(10000), poly_random(10000)}; volatile int vo = v[1] & v[2]; } \
+    if (chance == 10) { volatile int v[2] = {poly_random(10000), poly_random(10000)}; volatile int vo = v[1] - v[2]; } \
+    if (chance == 11) { volatile int v[2] = {poly_random(10000), poly_random(10000)}; volatile int vo = v[1] / (v[2] + 1); } \
+    if (chance == 12) { volatile int v[2] = {poly_random(10000), poly_random(10000)}; volatile int vo = v[2] % (v[1] + 1); } \
+    if (chance == 13) { volatile int v1 = poly_random(10000), v2 = v1 + poly_random(10000); } \
+    if (chance == 14) { volatile int v1 = poly_random(10000), v2 = v1 * poly_random(10000); } \
+    if (chance == 15) { volatile int v1 = poly_random(10000), v2 = v1 | poly_random(10000); } \
+    if (chance == 16) { volatile int v1 = poly_random(10000), v2 = v1 ^ poly_random(10000); } \
+    if (chance == 17) { volatile int v1 = poly_random(10000), v2 = v1 & poly_random(10000); } \
+    if (chance == 18) { volatile int v1 = poly_random(10000), v2 = v1 - poly_random(10000); } \
+    if (chance == 19) { volatile int v1 = poly_random(10000), v2 = v1 / (poly_random(10000) + 1); } \
+    if (chance == 20) { volatile int v1 = poly_random(10000), v2 = v1 % (poly_random(10000) + 1); } \
+}
