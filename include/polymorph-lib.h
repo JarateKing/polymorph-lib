@@ -4,9 +4,9 @@
 
 struct poly {
 private:
-	// common types
-	typedef unsigned long long ull;
-	typedef unsigned int ui;
+    // common types
+    typedef unsigned long long ull;
+    typedef unsigned int ui;
 
     // arithmetic simplification functions
     static constexpr ull sq(ull x) { return x * x; }
@@ -15,16 +15,16 @@ private:
     
 public:
     // normal prng's are hard to use here, since we can't easily modify our state
-	// we need to use a counter-based rng, to use __COUNTER__ as our state instead
-	// https://en.wikipedia.org/wiki/Counter-based_random_number_generator_(CBRNG)
-	// we use Widynski's Squares method to achieve this: https://arxiv.org/abs/2004.06278
+    // we need to use a counter-based rng, to use __COUNTER__ as our state instead
+    // https://en.wikipedia.org/wiki/Counter-based_random_number_generator_(CBRNG)
+    // we use Widynski's Squares method to achieve this: https://arxiv.org/abs/2004.06278
     static constexpr ui Widynski_Squares(ull count, ull seed) {
         unsigned long long cs = (count + 1) * seed;
         return (sq(sh(sq(sh(sm(cs))) + cs + seed)) + cs) >> 32;
     }
     
     // we define our seed based off of the __DATE__ and __TIME__ macros
-	// this allows us to have different compile-time seed values
+    // this allows us to have different compile-time seed values
     static constexpr ull Seed = (__DATE__[10] - '0') +
                                 (__DATE__[9] - '0') * 10 +
                                 (__DATE__[5] - '0') * 100 +
@@ -45,9 +45,9 @@ public:
 
 // random no-ops, inserts junk code
 #define poly_junk() { \
-	int chance = poly_random(21); \
-	if (chance == 0) { volatile int value = poly_random(10000); } \
-	if (chance == 1) { volatile float value = poly_random(1000); } \
+    int chance = poly_random(21); \
+    if (chance == 0) { volatile int value = poly_random(10000); } \
+    if (chance == 1) { volatile float value = poly_random(1000); } \
     if (chance == 2) { volatile double value = poly_random(1000); } \
     if (chance == 3) { volatile char value = poly_random(100000); } \
     if (chance == 4) { volatile int v[4] = {poly_random(1000), poly_random(1000), poly_random(1000), poly_random(1000)}; } \
