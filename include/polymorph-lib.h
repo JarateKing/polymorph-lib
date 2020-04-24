@@ -87,4 +87,5 @@ public:
 #define poly_uint() ((unsigned int)poly_int())
 #define poly_ll() (((long long)poly_int() << 32) + poly_int())
 #define poly_ull() ((unsigned long long)poly_ll())
-
+#define poly_float() (static_cast<float>(poly_int()) / static_cast<float>(INT_MAX))
+#define poly_double() (static_cast<double>(poly_ll()) / static_cast<double>(LONG_LONG_MAX))
