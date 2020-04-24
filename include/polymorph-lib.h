@@ -81,3 +81,10 @@ public:
     int chance = poly_random(c); \
     if (chance == 0) { f; } \
 }
+
+// various random types
+#define poly_int() ((int)poly::Widynski_Squares(__COUNTER__, poly::Seed))
+#define poly_uint() ((unsigned int)poly_int())
+#define poly_ll() (((long long)poly_int() << 32) + poly_int())
+#define poly_ull() ((unsigned long long)poly_ll())
+
