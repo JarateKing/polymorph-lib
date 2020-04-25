@@ -1,8 +1,8 @@
 # Polymorph-lib
 
-This is a header-only library that provides various functionality for randomization on compile-time, in a convenient to use manner that is easy to integrate without any external dependencies.
+This is a header-only library that provides various functionality for randomization on compile-time, in a convenient to use manner that is easy to integrate without any external dependencies or runtime cost.
 
-This is *not* a polymorphic code engine, but it takes inspiration from the concept of polymorphic code. You can, however, simulate a polymorphic code engine by recompiling your program each time you would like to run it.
+This is *not* a polymorphic code engine, since it doesn't change the code signature every time it runs, but it takes inspiration from the concept of polymorphic code. You can, however, simulate a polymorphic code engine by recompiling your program each time you would like to run it.
 
 ## Use-cases
 
@@ -19,6 +19,7 @@ This is *not* a polymorphic code engine, but it takes inspiration from the conce
 - `poly_junk()` - make junk code that doesn't do anything
 - `poly_random_order(f1,f2)` - run the functions `f1` and `f2` in some random order
 - `poly_random_chance(c,f)` - random chance to call function `f` -- approximately every `c` distinct calls will call `f` once
+- `poly_int()` / `uint()` / `ll()` / `ull()` / `float()` / `double()` - random value of that data type (floating point types range from 0.0 to 1.0).
 4. Compile with some level of optimization (so that redundant branching is removed)
 
 ## Details
