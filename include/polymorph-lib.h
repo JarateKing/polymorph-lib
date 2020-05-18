@@ -111,7 +111,7 @@ public:
 // various random types
 #define poly_int() ((int)poly::Widynski_Squares(__COUNTER__, poly::Seed))
 #define poly_uint() ((unsigned int)poly_int())
-#define poly_ll() (((long long)poly_int() << 32) + poly_int())
+#define poly_ll() (((long long)poly_int() << 32) ^ poly_int())
 #define poly_ull() ((unsigned long long)poly_ll())
 #define poly_float() (static_cast<float>(poly_uint()) / static_cast<float>(UINT_MAX))
 #define poly_double() (static_cast<double>(poly_ull()) / static_cast<double>(ULLONG_MAX))
