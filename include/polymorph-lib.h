@@ -25,15 +25,41 @@ public:
     
     // we define our seed based off of the __DATE__ and __TIME__ macros
     // this allows us to have different compile-time seed values
-    static constexpr ull Seed = (__DATE__[10] - '0') +
-                                (__DATE__[9] - '0') * 10 +
-                                (__DATE__[5] - '0') * 100 +
-                                (__TIME__[0] - '0') * 1000 +
-                                (__TIME__[1] - '0') * 10000 +
-                                (__TIME__[3] - '0') * 100000 +
-                                (__TIME__[4] - '0') * 1000000 +
-                                (__TIME__[6] - '0') * 10000000 +
-                                (__TIME__[7] - '0') * 100000000;
+    static constexpr ull Day =
+		(__DATE__[5] - '0') + 
+		(__DATE__[4]==' ' ? 0 : __DATE__[4]-'0')*10;
+	
+	static constexpr ull Month =
+		(__DATE__[1]=='a'&&__DATE__[2]=='n') * 1 +
+		(__DATE__[2]=='b') * 2 +
+		(__DATE__[1]=='a'&&__DATE__[2]=='r') * 3 +
+		(__DATE__[1]=='p'&&__DATE__[2]=='r') * 4 +
+		(__DATE__[2]=='y') * 5 +
+		(__DATE__[1]=='u'&&__DATE__[2]=='n') * 6 +
+		(__DATE__[2]=='l') * 7 +
+		(__DATE__[2]=='g') * 8 +
+		(__DATE__[2]=='p') * 9 +
+		(__DATE__[2]=='t') * 10 +
+		(__DATE__[2]=='v') * 11 +
+		(__DATE__[2]=='c') * 12;
+	
+	static constexpr ull Year =
+		(__DATE__[9] - '0') +
+		(__DATE__[10] - '0') * 10;
+	
+	static constexpr ull Time =
+		(__TIME__[0] - '0') * 1 +
+		(__TIME__[1] - '0') * 10 +
+		(__TIME__[3] - '0') * 100 +
+		(__TIME__[4] - '0') * 1000 +
+		(__TIME__[6] - '0') * 10000 +
+		(__TIME__[7] - '0') * 100000;
+	
+	static constexpr ull Seed =
+		Time +
+		100000ll * Day +
+		10000000ll * Month + 
+		1000000000ll * Year;
 };
 
 // =====================
