@@ -1,3 +1,6 @@
+#include <cmath>
+#include <limits>
+
 // ================
 // COMPILE-TIME RNG
 // ================
@@ -21,6 +24,13 @@ public:
     static constexpr ui Widynski_Squares(ull count, ull seed) {
         unsigned long long cs = (count + 1) * seed;
         return (sq(sh(sq(sh(sm(cs))) + cs + seed)) + cs) >> 32;
+    }
+	
+	// we use Box-Muller as our method to obtain a normal distribution
+	// we add the lowest positive double value to prevent log(0) from being run
+    static constexpr double BoxMuller(double a, double b, double sigma, double mu) {
+		const double e = std::numeric_limits<double>::min();
+        return sqrt(-2.0 * log(a+e)) * cos(2.0 * M_PI * b) * sigma + mu;
     }
     
     // we define our seed based off of the __DATE__ and __TIME__ macros
@@ -115,3 +125,6 @@ public:
 #define poly_ull() ((unsigned long long)poly_ll())
 #define poly_float() (static_cast<float>(poly_uint()) / static_cast<float>(UINT_MAX))
 #define poly_double() (static_cast<double>(poly_ull()) / static_cast<double>(ULLONG_MAX))
+
+// random normal distribution
+#define poly_normal(std,mean) (poly::BoxMuller(poly_double(),poly_double(),std,mean))
