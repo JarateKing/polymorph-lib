@@ -127,4 +127,4 @@ public:
 #define poly_double() (static_cast<double>(poly_ull()) / static_cast<double>(ULLONG_MAX))
 
 // random normal distribution
-#define poly_normal(std,mean) (poly::BoxMuller(poly_double(),poly_double(),std,mean))
+#define poly_normal(sigma,mu) (poly::BoxMuller(poly_double(),poly_double(),sigma,mu))
