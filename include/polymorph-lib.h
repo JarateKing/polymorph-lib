@@ -65,23 +65,31 @@ public:
         (__TIME__[6] - '0') * 10000 +
         (__TIME__[7] - '0') * 100000;
     
-	#ifndef __POLY_RANDOM_SEED__
+    #ifndef __POLY_RANDOM_SEED__
     static constexpr ull Seed =
         Time +
         100000ll * Day +
         10000000ll * Month + 
         1000000000ll * Year;
-	#else
-	static constexpr ull Seed = __POLY_RANDOM_SEED__;
-	#endif
+    #else
+    static constexpr ull Seed = __POLY_RANDOM_SEED__;
+    #endif
 };
 
 // =====================
 // POLYMORPHIC FUNCTIONS
 // =====================
 
+// various random types
+#define poly_uint() (poly::Widynski_Squares(__COUNTER__, poly::Seed))
+#define poly_int() ((int)poly_uint())
+#define poly_ull() (((unsigned long long)poly_int() << 32) ^ poly_int())
+#define poly_ll() ((long long)poly_ull())
+#define poly_float() (static_cast<float>(poly_uint()) / static_cast<float>(UINT_MAX))
+#define poly_double() (static_cast<double>(poly_ull()) / static_cast<double>(ULLONG_MAX))
+
 // random number modulo max
-#define poly_random(max) (poly::Widynski_Squares(__COUNTER__, poly::Seed) % max)
+#define poly_random(max) (poly_uint() % max)
 
 // random no-ops, inserts junk code
 #define poly_junk() { \
@@ -121,14 +129,6 @@ public:
     int chance = poly_random(c); \
     if (chance == 0) { f; } \
 }
-
-// various random types
-#define poly_int() ((int)poly::Widynski_Squares(__COUNTER__, poly::Seed))
-#define poly_uint() ((unsigned int)poly_int())
-#define poly_ll() (((long long)poly_int() << 32) ^ poly_int())
-#define poly_ull() ((unsigned long long)poly_ll())
-#define poly_float() (static_cast<float>(poly_uint()) / static_cast<float>(UINT_MAX))
-#define poly_double() (static_cast<double>(poly_ull()) / static_cast<double>(ULLONG_MAX))
 
 // random normal distribution
 #define poly_normal(sigma,mu) (poly::BoxMuller(poly_double(),poly_double(),sigma,mu))
