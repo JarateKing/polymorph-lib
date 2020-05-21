@@ -25,51 +25,51 @@ public:
         unsigned long long cs = (count + 1) * seed;
         return (sq(sh(sq(sh(sm(cs))) + cs + seed)) + cs) >> 32;
     }
-	
-	// we use Box-Muller as our method to obtain a normal distribution
-	// we add the lowest positive double value to prevent log(0) from being run
+    
+    // we use Box-Muller as our method to obtain a normal distribution
+    // we add the lowest positive double value to prevent log(0) from being run
     static constexpr double BoxMuller(double a, double b, double sigma, double mu) {
-		const double e = std::numeric_limits<double>::min();
+        const double e = std::numeric_limits<double>::min();
         return sqrt(-2.0 * log(a+e)) * cos(2.0 * M_PI * b) * sigma + mu;
     }
     
     // we define our seed based off of the __DATE__ and __TIME__ macros
     // this allows us to have different compile-time seed values
     static constexpr ull Day =
-		(__DATE__[5] - '0') + 
-		(__DATE__[4]==' ' ? 0 : __DATE__[4]-'0')*10;
-	
-	static constexpr ull Month =
-		(__DATE__[1]=='a'&&__DATE__[2]=='n') * 1 +
-		(__DATE__[2]=='b') * 2 +
-		(__DATE__[1]=='a'&&__DATE__[2]=='r') * 3 +
-		(__DATE__[1]=='p'&&__DATE__[2]=='r') * 4 +
-		(__DATE__[2]=='y') * 5 +
-		(__DATE__[1]=='u'&&__DATE__[2]=='n') * 6 +
-		(__DATE__[2]=='l') * 7 +
-		(__DATE__[2]=='g') * 8 +
-		(__DATE__[2]=='p') * 9 +
-		(__DATE__[2]=='t') * 10 +
-		(__DATE__[2]=='v') * 11 +
-		(__DATE__[2]=='c') * 12;
-	
-	static constexpr ull Year =
-		(__DATE__[9] - '0') +
-		(__DATE__[10] - '0') * 10;
-	
-	static constexpr ull Time =
-		(__TIME__[0] - '0') * 1 +
-		(__TIME__[1] - '0') * 10 +
-		(__TIME__[3] - '0') * 100 +
-		(__TIME__[4] - '0') * 1000 +
-		(__TIME__[6] - '0') * 10000 +
-		(__TIME__[7] - '0') * 100000;
-	
-	static constexpr ull Seed =
-		Time +
-		100000ll * Day +
-		10000000ll * Month + 
-		1000000000ll * Year;
+        (__DATE__[5] - '0') + 
+        (__DATE__[4]==' ' ? 0 : __DATE__[4]-'0')*10;
+    
+    static constexpr ull Month =
+        (__DATE__[1]=='a'&&__DATE__[2]=='n') * 1 +
+        (__DATE__[2]=='b') * 2 +
+        (__DATE__[1]=='a'&&__DATE__[2]=='r') * 3 +
+        (__DATE__[1]=='p'&&__DATE__[2]=='r') * 4 +
+        (__DATE__[2]=='y') * 5 +
+        (__DATE__[1]=='u'&&__DATE__[2]=='n') * 6 +
+        (__DATE__[2]=='l') * 7 +
+        (__DATE__[2]=='g') * 8 +
+        (__DATE__[2]=='p') * 9 +
+        (__DATE__[2]=='t') * 10 +
+        (__DATE__[2]=='v') * 11 +
+        (__DATE__[2]=='c') * 12;
+    
+    static constexpr ull Year =
+        (__DATE__[9] - '0') +
+        (__DATE__[10] - '0') * 10;
+    
+    static constexpr ull Time =
+        (__TIME__[0] - '0') * 1 +
+        (__TIME__[1] - '0') * 10 +
+        (__TIME__[3] - '0') * 100 +
+        (__TIME__[4] - '0') * 1000 +
+        (__TIME__[6] - '0') * 10000 +
+        (__TIME__[7] - '0') * 100000;
+    
+    static constexpr ull Seed =
+        Time +
+        100000ll * Day +
+        10000000ll * Month + 
+        1000000000ll * Year;
 };
 
 // =====================
