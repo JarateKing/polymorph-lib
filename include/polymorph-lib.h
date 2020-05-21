@@ -65,11 +65,15 @@ public:
         (__TIME__[6] - '0') * 10000 +
         (__TIME__[7] - '0') * 100000;
     
+	#ifndef __POLY_RANDOM_SEED__
     static constexpr ull Seed =
         Time +
         100000ll * Day +
         10000000ll * Month + 
         1000000000ll * Year;
+	#else
+	static constexpr ull Seed = __POLY_RANDOM_SEED__;
+	#endif
 };
 
 // =====================
