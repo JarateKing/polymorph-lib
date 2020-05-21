@@ -22,6 +22,8 @@ This is *not* a polymorphic code engine, since it doesn't change the code signat
 - `poly_int()` / `uint()` / `ll()` / `ull()` / `float()` / `double()` - random value of that data type (floating point types range from 0.0 to 1.0).
 4. Compile with some level of optimization (so that redundant branching is removed)
 
+If you want to either manually set a specific seed, or generate a seed using an external program, you can use set the macro `__POLY_RANDOM_SEED__` as in `-D __POLY_RANDOM_SEED__=1234567890`. This is optional, and if this is unspecified a seed will be automatically generated based off the current time.
+
 ## Details
 
 Before I describe the details of the random number generator, I should delve into the source of entropy used. The GCC supports `__DATE__` and `__TIME__` macros which change on each compile (assuming the compiles aren't made within the same second). We combine those into an integer, that acts as our initial seed.
