@@ -24,7 +24,7 @@ This is *not* a polymorphic code engine, since it doesn't change the code signat
 - `poly_normal(sigma,mu)` - generate a random floating point value following a normal distribution, using sigma and mu values.
 4. Compile with some level of optimization (so that redundant branching is removed)
 
-If you want to either manually set a specific seed, or generate a seed using an external program, you can use set the macro `__POLY_RANDOM_SEED__` as in `-D __POLY_RANDOM_SEED__=1234567890`. This is optional, and if this is unspecified a seed will be automatically generated based off the current time.
+If you want to either manually set a specific seed, or generate a seed using an external program, you can use set the macro `__POLY_RANDOM_SEED__` as in `-D __POLY_RANDOM_SEED__=1234567890ull`. This is optional, and if this is unspecified a seed will be automatically generated based off the current time.
 
 ## Details
 
