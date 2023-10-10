@@ -2,22 +2,37 @@ import os
 import random
 import time
 
-# default seed, wait in between for different seed
-os.system('g++ -g -O2 -std=gnu++17 -static simple.cpp -o output/random1.exe')
-time.sleep(1)
-os.system('g++ -g -O2 -std=gnu++17 -static simple.cpp -o output/random2.exe')
-time.sleep(1)
-os.system('g++ -g -O2 -std=gnu++17 -static simple.cpp -o output/random3.exe')
+# Define the source code file and compilation options
+source_file = 'simple.cpp'
+compile_options = 'g++ -g -O2 -std=gnu++17 -static'
 
-# fixed seed
-os.system('g++ -g -O2 -std=gnu++17 -D __POLY_RANDOM_SEED__=1234567890ull -static simple.cpp -o output/fixed1.exe')
-os.system('g++ -g -O2 -std=gnu++17 -D __POLY_RANDOM_SEED__=1234567890ull -static simple.cpp -o output/fixed2.exe')
-os.system('g++ -g -O2 -std=gnu++17 -D __POLY_RANDOM_SEED__=1234567890ull -static simple.cpp -o output/fixed3.exe')
+# Define the number of random seeds and the output directory
+num_random_seeds = 3
+output_dir = 'output/'
 
-# external seed
-os.system('g++ -g -O2 -std=gnu++17 -D __POLY_RANDOM_SEED__=' + str(random.randrange(18446744073709551615)) + 'ull -static simple.cpp -o output/seeded1.exe')
-os.system('g++ -g -O2 -std=gnu++17 -D __POLY_RANDOM_SEED__=' + str(random.randrange(18446744073709551615)) + 'ull -static simple.cpp -o output/seeded2.exe')
-os.system('g++ -g -O2 -std=gnu++17 -D __POLY_RANDOM_SEED__=' + str(random.randrange(18446744073709551615)) + 'ull -static simple.cpp -o output/seeded3.exe')
+# Compile the code with different seeds
+for i in range(num_random_seeds):
+    seed = str(random.randrange(18446744073709551615)) + 'ull'
+    output_exe = f'{output_dir}random{i + 1}.exe'
+    compile_command = f'{compile_options} {source_file} -o {output_exe}'
+    os.system(compile_command)
+    time.sleep(1)
 
-# different types
-os.system('g++ -g -O2 -std=gnu++17 -static types.cpp -o output/types.exe')
+# Compile the code with a fixed seed
+fixed_seed = '1234567890ull'
+for i in range(num_random_seeds):
+    output_exe = f'{output_dir}fixed{i + 1}.exe'
+    compile_command = f'{compile_options} -D __POLY_RANDOM_SEED__={fixed_seed} {source_file} -o {output_exe}'
+    os.system(compile_command)
+
+# Compile the code with an external seed
+for i in range(num_random_seeds):
+    seed = str(random.randrange(18446744073709551615)) + 'ull'
+    output_exe = f'{output_dir}seeded{i + 1}.exe'
+    compile_command = f'{compile_options} -D __POLY_RANDOM_SEED__={seed} {source_file} -o {output_exe}'
+    os.system(compile_command)
+
+# Compile code with different types
+types_source_file = 'types.cpp'
+types_output_exe = f'{output_dir}types.exe'
+os.system(f'{compile_options} {types_source_file} -o {types_output_exe}')
