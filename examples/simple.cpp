@@ -2,7 +2,9 @@
 #include "../include/polymorph-lib.h"
 
 int main() {
-    // print out random number "0 <= x < 10000"
-    // this number will only change when you recompile
-    std::cout << poly_random(10000) << '\n';
+    // Generate and print a random number between 0 and 9999 (inclusive).
+    // This number will remain the same until the program is recompiled.
+    int random_number = poly_random(10000);
+    std::cout << "Random Number: " << random_number << '\n';
+    return 0;
 }
