@@ -20,11 +20,11 @@ Polymorph-lib has several practical use cases:
 
 To integrate Polymorph-lib into your project, follow these simple steps:
 
-    Place the include/polymorph-lib.h header file somewhere in your project directory.
+    1. Place the include/polymorph-lib.h header file somewhere in your project directory.
 
-    Include the library in your project using #include "polymorph-lib.h" or an equivalent include statement.
+    2. Include the library in your project using #include "polymorph-lib.h" or an equivalent include statement.
 
-    Utilize the provided randomized functions. Some key functions include:
+    3. Utilize the provided randomized functions. Some key functions include:
 
         poly_random(n): Obtain a random number between 0 (inclusive) and n (exclusive).
 
@@ -38,7 +38,7 @@ To integrate Polymorph-lib into your project, follow these simple steps:
 
         poly_normal(sigma, mu): Generate random floating-point values following a normal distribution with given sigma and mu values.
 
-    Compile your code with some level of optimization to ensure that redundant branches are removed.
+    4. Compile your code with some level of optimization to ensure that redundant branches are removed.
 
 If you wish to set a specific seed manually or generate a seed using an external program, you can use the __POLY_RANDOM_SEED__ macro, like this: -D __POLY_RANDOM_SEED__=1234567890ull. This step is optional, as a seed will be automatically generated based on the current time if left unspecified.
 
